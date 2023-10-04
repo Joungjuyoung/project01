@@ -28,6 +28,7 @@ import javax.validation.Valid;
 import com.team2.domain.Movie;
 import com.team2.service.MovieService;
 import com.team2.exception.CategoryException;
+import com.team2.exception.MovieIdException;
 
 @Controller
 @RequestMapping("/movies")
@@ -158,4 +159,4 @@ public class MovieController {
         return "redirect:/movies";
     }
 }
-}
+
