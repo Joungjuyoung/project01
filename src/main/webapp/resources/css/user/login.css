@@ -1,0 +1,28 @@
+* {
+  /* box-sizing: border-box; */
+  font-family: "Noto Sans KR", sans-serif;
+}
+html {
+  min-height: 700px;
+}
+
+body {
+}
+.loginForm {
+  width: 300px;
+  margin: 0;
+  background-color: #fefcef;
+  text-align: center;
+  margin: 0 auto;
+  border: 1px solid lightgray;
+}
+
+div input {
+  font-size: 20px;
+  margin-top: 20px;
+}
+div button {
+  margin-top: 10px;
+  width: 100px;
+  height: 36px;
+}
