@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.team2.mapper.ReviewReplyMapper">
+
+	<select id="getListWithPaging" resultType="com.team2.domain.ReviewReplyVO">
+		<![CDATA[
+			SELECT
+				r_id, r_r_id, r_r_title, r_r_content, r_r_writer, r_r_regDate, r_r_modDate
+			FROM (
+				SELECT /*+ INDEX(tbl_review_reply review_reply_pk) */
+					rownum rn, r_id, r_r_id, r_r_title, r_r_content, r_r_writer, r_r_regDate, r_r_modDate
+				FROM
+					tbl_review_reply
+				WHERE
+					r_id = #{r_id} AND
+					r_r_id > 0 AND
+					rownum <= #{criVO.page} * #{criVO.size}
+				)
+			WHERE
+				rn > (#{criVO.page} - 1) * #{criVO.size}
+	]]>
+	</select>
+	
+	<select id="getCountByRId" resultType="int">
+		<![CDATA[
+			SELECT
+				COUNT(r_r_id)
+			FROM
+				tbl_review_reply
+			WHERE
+				r_id = #{r_id}
+		]]>
+	</select>
+	
+	<select id="read" resultType="com.team2.domain.ReviewReplyVO">
+		SELECT
+			*
+		FROM
+			tbl_review_reply
+		WHERE
+			r_r_id = #{r_r_id}
+	</select>
+
+	<insert id="insert">
+		INSERT INTO tbl_review_reply(r_r_id, r_id, r_r_title, r_r_content, r_r_writer)
+			VALUES(seq_review_reply.nextval, #{r_id}, #{r_r_title}, #{r_r_content}, #{r_r_writer})
+	</insert>
+
+	<update id="update">
+		UPDATE
+			tbl_review_reply
+		SET
+			r_r_title = #{r_r_title}, r_r_content = #{r_r_content}, r_r_modDate = sysdate
+		WHERE
+			r_r_id = #{r_r_id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM
+			tbl_review_reply
+		WHERE
+			r_r_id = #{r_r_id}
+	</delete>
+
+</mapper>
