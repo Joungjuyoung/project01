@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.team2.mapper.ReviewMapper">
+	
+	<sql id="criteriaVO">
+			<trim prefix="(" suffix=") and " prefixOverrides="or">
+				<foreach item='type' collection="typeArr">
+					<trim prefix="or">
+						<choose>
+							<when test="type == 'T'.toString()">
+								r_title like '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'C'.toString()">
+								r_content like '%'||#{keyword}||'%'
+							</when>					
+							<when test="type == 'W'.toString()">
+								r_writer like '%'||#{keyword}||'%'
+							</when>
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+	</sql>
+	
+	<select id="getList" resultType="com.team2.domain.ReviewVO">
+		<![CDATA[
+			SELECT 
+				r_id, r_title, r_content, r_writer, r_readCount, r_regDate, r_modDate 
+			FROM (
+				SELECT /*+ INDEX_DESC(tbl_review review_pk) */
+					rownum rn, r_id, r_title, r_content, r_writer, r_readCount, r_regDate, r_modDate 
+				FROM 
+					tbl_review 
+				WHERE 
+		]]>
+		<include refid="criteriaVO"></include>
+		<![CDATA[
+					rownum <= #{page} * #{size}
+				)
+			WHERE 
+				rn > (#{page} - 1) * #{size}
+		]]>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			tbl_review 
+		WHERE
+		<include refid="criteriaVO"></include>
+			r_id > 0
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO
+			tbl_review
+				(r_id, r_title, r_content, r_writer)
+		 	VALUES
+			 	(seq_review.NEXTVAL, #{r_title}, #{r_content}, #{r_writer})
+	</insert>
+	
+	<select id="read" resultType="com.team2.domain.ReviewVO">
+		<![CDATA[
+			SELECT
+				* 
+			FROM
+				tbl_review 
+			WHERE
+				r_id = #{r_id}
+		]]>
+	</select>
+	
+	<update id="readCountPlus">
+		UPDATE
+			tbl_review
+		SET
+			r_readCount = r_readCount + 1
+		WHERE
+			r_id = #{r_id}
+	</update>
+	
+	<update id="modify">
+		UPDATE
+			tbl_review
+		SET
+			r_title = #{r_title},
+			r_content = #{r_content},
+			r_modDate = SYSDATE
+		WHERE
+			r_id = #{r_id}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM
+			tbl_review
+		WHERE
+			r_id = #{r_id}
+	</delete>
+	
+	<delete id="deleteReplies">
+		DELETE FROM
+			tbl_review_reply
+		WHERE
+			r_id = #{r_id}
+	</delete>
+
+</mapper>

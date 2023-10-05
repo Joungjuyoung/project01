@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
-
+<%@ include file="../includes/header.jsp" %>
 <html>
 <head>
 	<title>Home</title>
@@ -33,7 +33,7 @@
 	})
 </script>
 <body>
-	<jsp:include page="./nav.jsp" />
+	
 	<form class ='loginForm' name='homeForm' method="post" action="./member/login">
 		<c:if test="${member == null}">
 			<div>
@@ -59,5 +59,7 @@
 			<p style="color: red;">로그인 실패! 아이디와 비밀번호 확인해주세요.</p>
 		</c:if>
 	</form>
+	
 </body>
 </html>
+<%@ include file="../includes/footer.jsp" %>
