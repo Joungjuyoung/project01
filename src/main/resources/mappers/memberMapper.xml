@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="memberMapper">
+	<!-- 회원가입  -->
+	<insert id="register">
+	INSERT INTO TBL_USER(u_id,u_pw,u_nickname,u_email,u_phone,u_auth)
+	 VALUES(#{u_id},#{u_pw},#{u_nickname},#{u_email},#{u_phone},#{u_auth})
+	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM TBL_USER
+		WHERE U_ID = #{u_id}
+	</select>
+	<!-- 아이디 중복체크 -->
+	<select id="nameChk" resultType="int">
+		SELECT COUNT(*) FROM TBL_USER
+		WHERE U_NICKNAME = #{u_nickname}
+	</select>
+	
+	<!-- 로그인  -->
+	<select id="login" resultType="com.team2.domain.MemberVo">
+		SELECT U_ID, U_PW, U_NICKNAME,U_AUTH
+		 FROM TBL_USER
+		 WHERE U_ID = #{u_id}
+	</select>
+	
+	</mapper>

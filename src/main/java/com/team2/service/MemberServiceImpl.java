@@ -26,8 +26,7 @@ public class MemberServiceImpl implements MemberService {
 		System.out.println("Service IdChk");
 		int result = dao.idChk(vo);
 		return result;
-	}
-	
+		}
 	//닉네임 중복체크
 	@Override
 	public int nameChk(MemberVo vo) throws Exception{

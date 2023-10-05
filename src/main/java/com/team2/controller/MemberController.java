@@ -90,7 +90,7 @@ public class MemberController {
 			rttr.addFlashAttribute("msg",false);
 		}
 		
-		return "redirect:/";
+		return "redirect:/review/list";
 		
 	}
 	
