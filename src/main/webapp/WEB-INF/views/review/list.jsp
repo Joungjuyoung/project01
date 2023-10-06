@@ -77,7 +77,9 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Board List Page
+				<c:if test="${member.u_auth != null}">
 				<button id='regBtn' type="button" class="btn btn-xs pull-right">Register New Board</button>
+				</c:if>
 			</div>
 			<!-- /.panel-heading -->
 			

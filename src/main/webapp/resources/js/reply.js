@@ -18,7 +18,7 @@ var reviewReplyService = (function() {
 					callback(result);
 				}
 			},
-			error : function(xhr, status, err) {
+			fail : function(xhr, status, err) {
 				if(errorfn) {
 					errorfn(err);
 				}
@@ -30,22 +30,27 @@ var reviewReplyService = (function() {
 		var r_id = param.r_id;
 		var page = param.page || 1;
 		
-		$.getJSON("/replies/pages/" + r_id + "/" + page + ".json",
-			function(data){
-				if(callback) {
-					callback(data.replyCount, data.list);
-				}
-			})
-			.error(function(event, jqxhr, exception) {
-    		if (jqxhr.status == 404) {
-					alert("error occurred ");   
-    		}
-			})
-			.fail(function(xhr, status, err) {
-				if(errorfn){
-					errorfn();
-				}
-			});
+
+			$.getJSON("/replies/page/" + r_id + "/" + page + ".json", function(data){
+    if(callback) {
+        var replyCount = parseInt(data.replyCount);
+        var list = data.list;
+        callback(replyCount, list);
+                   
+    }
+})
+.fail(function(event, jqxhr, exception) {
+       
+    if (jqxhr.status == 404) {
+        alert("error occurred ");
+    }
+})
+.fail(function(xhr, status, err) {
+     
+    if(errorfn){
+        errorfn();
+    }
+});
 	}
 	
 	function remove(r_r_id, callback, errorfn) {
@@ -57,7 +62,7 @@ var reviewReplyService = (function() {
 					callback(deleteResult);
 				}
 			},
-			error : function(xhr, status, err) {
+			fail : function(xhr, status, err) {
 				if(errorfn) {
 					errorfn(err);
 				}
@@ -79,7 +84,7 @@ var reviewReplyService = (function() {
 					callback(result);
 				}
 			},
-			error : function(xhr, status, err) {
+			fail : function(xhr, status, err) {
 				if(errorfn) {
 					errorfn(err);
 				}

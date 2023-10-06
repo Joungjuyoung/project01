@@ -29,7 +29,7 @@ public class ReviewReplyController {
 
 	private ReviewReplyService reviewReplyService;
 	
-	@GetMapping(value = "/page/{r_id}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@GetMapping(value = "/page/{r_id}/{page}.json", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("page") int page, @PathVariable("r_id") Long r_id) {
 		log.info("Review Reply Controller Get List ===================");
 		

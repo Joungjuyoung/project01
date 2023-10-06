@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ include file="../includes/header.jsp" %>
+
 <style>
 	.div-title {
 		width: 50%;
@@ -15,7 +16,7 @@
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
-
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var operForm = $("#operForm");
@@ -118,6 +119,7 @@
 		var modalRegisterBtn = $("#modalRegisterBtn");
 
 		$("#addReplyBtn").on("click", function(e) {
+			console.log("addReplyBtn");
 			modal.find("input").val("");
 			modalInputRegDate.closest("div").hide();
 			modal.find("button[id != 'modalCloseBtn']").hide();
@@ -226,7 +228,9 @@
 					<label>Writer</label>
 					<input class="form-control" name="r_writer" value='<c:out value="${reviewVO.r_writer}"/>' readonly="readonly">
 				</div>
+				<c:if test="${reviewVO.r_writer == member.u_id}">
 				<button data-oper="modify" class="btn btn-default">Modify</button>
+				</c:if>
 				<button data-oper="list" class="btn btn-info">List</button>
 
 				<div class='row'>
@@ -273,7 +277,7 @@
 					<label>Content</label><input class="form-control" name='r_r_content' value='New Reply!!!'>
 				</div>
 				<div class="form-group">
-					<label>Replyer</label><input class="form-control" name='r_r_writer' value='replyer'>
+					<label>Replyer</label><input class="form-control" name='r_r_writer' value='${member.u_id }'>
 				</div>
 				<div class="form-group">
 					<label>Reg Date</label><input class="form-control" name='r_r_writer' value=''>
@@ -284,6 +288,7 @@
 				<button id='modalDeleteBtn' type='button' class='btn btn-danger'>DELETE</button>
 				<button id='modalRegisterBtn' type='button' class='btn btn-primary'>REGISTER</button>
 				<button id='modalCloseBtn' type='button' class='btn btn-default'>CLOSE</button>
+				
 			</div>
 		</div>
 	</div>
