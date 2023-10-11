@@ -36,4 +36,10 @@ public class MemberDaoImpl implements MemberDao {
 		System.out.println("Dao Login");
 		return sql.selectOne("memberMapper.login",vo);
 	}
+	//내정보 수정
+	@Override
+	public void memberUpdate(MemberVo vo) throws Exception{
+		System.out.println("Dao Update");
+		sql.update("memberMapper.memberUpdate",vo);
+	}
 }

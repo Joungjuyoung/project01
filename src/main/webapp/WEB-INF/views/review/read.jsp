@@ -277,7 +277,7 @@
 					<label>Content</label><input class="form-control" name='r_r_content' value='New Reply!!!'>
 				</div>
 				<div class="form-group">
-					<label>Replyer</label><input class="form-control" name='r_r_writer' value='${member.u_id }'>
+					<label>Replyer</label><input class="form-control" name='r_r_writer' value="${member.u_id }">
 				</div>
 				<div class="form-group">
 					<label>Reg Date</label><input class="form-control" name='r_r_writer' value=''>

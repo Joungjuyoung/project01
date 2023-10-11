@@ -227,7 +227,7 @@
 						</c:if>
 						<c:if test="${member.u_auth == 0 }">
 							<ul class="dropdown-menu dropdown-user">
-								<li><a href="#"><i class="fa fa-user fa-fw"></i> 내정보</a></li>
+								<li><a href="/member/memberUpdateView"><i class="fa fa-user fa-fw"></i> 내정보수정</a></li>
 								<li class="divider"></li>
 								<li><a href="/member/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
 							</ul>

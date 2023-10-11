@@ -28,4 +28,13 @@
 		 WHERE U_ID = #{u_id}
 	</select>
 	
+	<!-- 내정보 수정 -->
+	<update id = "memberUpdate">
+		UPDATE TBL_USER SET
+		U_PW = #{u_pw},
+		U_NICKNAME = #{u_nickname},
+		U_EMAIL = #{u_email},
+		U_PHONE = #{u_phone}
+		WHERE U_ID = #{u_id}
+	</update>
 	</mapper>

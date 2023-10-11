@@ -11,4 +11,6 @@ public interface MemberService {
 	public int nameChk(MemberVo vo) throws Exception;
 	//로그인
 	public MemberVo login(MemberVo vo) throws Exception;
+	//내정보 수정
+	public void memberUpdate(MemberVo vo) throws Exception;
 }

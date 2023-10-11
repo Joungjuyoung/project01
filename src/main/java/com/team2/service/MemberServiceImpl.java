@@ -42,4 +42,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.login(vo);
 	}
 	
+	//내정보 수정
+	@Override
+	public void memberUpdate(MemberVo vo) throws Exception{
+		System.out.println("Service update");
+		dao.memberUpdate(vo);
+	}
+	
 }

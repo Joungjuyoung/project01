@@ -110,4 +110,23 @@ public class MemberController {
 		boolean pwdChk = pwdEncoder.matches(vo.getU_pw(), login.getU_pw());
 		return pwdChk;
 	}
+	
+	/*
+	 * //내정보 수정
+	 * 
+	 * @GetMapping("/memberUpdateView") public String registerUpdateView() throws
+	 * Exception{ return "member/memberUpdateView"; }
+	 * 
+	 * @PostMapping("/memberUpdate") public String registerUpdate(MemberVo vo,
+	 * HttpSession session) throws Exception{ MemberVo login = service.login(vo);
+	 * System.out.println("Controller update");
+	 * 
+	 * if(login != null ) { System.out.println("성공"); String inputPass =
+	 * login.getU_pw(); String pwd = pwdEncoder.encode(inputPass); vo.setU_pw(pwd);
+	 * service.memberUpdate(vo); }else { System.out.println("실패"); return
+	 * "member/memberUpdateView"; } session.invalidate();
+	 * 
+	 * 
+	 * return "redirect:/"; }
+	 */
 }
