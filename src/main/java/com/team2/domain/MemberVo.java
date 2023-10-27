@@ -13,4 +13,6 @@ public class MemberVo {
 	String u_email;
 	String u_phone;
 	String u_auth;
+	int u_e_auth;
+	String u_e_key;
 }

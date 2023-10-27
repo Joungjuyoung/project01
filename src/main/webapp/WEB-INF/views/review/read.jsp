@@ -238,7 +238,9 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<i class="fa fa-comments fa-fw"></i> Reply
+								<c:if test="${member.u_id != null }">
 								<button id="addReplyBtn" class="btn btn-primary btn-xs pull-right">New Reply</button>
+								</c:if>
 							</div>
 							<div class="panel-body">
 								<ul class="chat">

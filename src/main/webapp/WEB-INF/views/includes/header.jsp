@@ -220,6 +220,7 @@
 						</a>
 						<c:if test="${member.u_auth == 1 }">
 							<ul class="dropdown-menu dropdown-user">
+								<li><a>${member.u_nickname }님 환영합니다.</a></li>
 								<li><a href="#"><i class="fa fa-user fa-fw"></i> 회원 관리</a></li>
 								<li class="divider"></li>
 								<li><a href="/member/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
@@ -227,6 +228,7 @@
 						</c:if>
 						<c:if test="${member.u_auth == 0 }">
 							<ul class="dropdown-menu dropdown-user">
+								<li><a>${member.u_nickname }님 환영합니다.</a></li>
 								<li><a href="/member/memberUpdateView"><i class="fa fa-user fa-fw"></i> 내정보수정</a></li>
 								<li class="divider"></li>
 								<li><a href="/member/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
@@ -245,6 +247,7 @@
 								<li><a href="/"><i class="fa fa-sign-out fa-fw"></i>로그인</a></li>
 							</ul>
 					</c:if>
+						
 				</li>
 				
 				

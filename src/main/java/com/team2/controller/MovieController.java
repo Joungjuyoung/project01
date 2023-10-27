@@ -31,7 +31,7 @@ import com.team2.exception.CategoryException;
 import com.team2.exception.MovieIdException;
 
 @Controller
-@RequestMapping("/movies")
+@RequestMapping("/movies/*")
 public class MovieController {
 	@Autowired
 	private MovieService movieService;

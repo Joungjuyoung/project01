@@ -1,5 +1,9 @@
 package com.team2.domain;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +17,7 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public void register(MemberVo vo) throws Exception {
+		
 		sql.insert("memberMapper.register", vo);
 	}
 	
@@ -41,5 +46,23 @@ public class MemberDaoImpl implements MemberDao {
 	public void memberUpdate(MemberVo vo) throws Exception{
 		System.out.println("Dao Update");
 		sql.update("memberMapper.memberUpdate",vo);
+	}
+	//이메일 인증
+	@Override
+	public void updateMailKey(MemberVo vo) throws Exception {
+		System.out.println("Dao Mail Key");
+	    sql.selectOne( "memberMapper.updateMailKey", vo);
+	}
+
+	@Override
+	public void updateMailAuth(MemberVo vo) throws Exception {
+		System.out.println("Dao Mail Auth");
+	    sql.selectOne("memberMapper.updateMailAuth", vo);
+	}
+
+	@Override
+	public void emailAuthFail(String id) throws Exception {
+		System.out.println("Dao Mail Fail");
+	    sql.selectOne("memberMapper.emailAuthFail", id);
 	}
 }

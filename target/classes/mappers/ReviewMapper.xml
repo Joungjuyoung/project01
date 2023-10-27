@@ -19,6 +19,9 @@
 							<when test="type == 'W'.toString()">
 								r_writer like '%'||#{keyword}||'%'
 							</when>
+							<when test="type == 'TC'.toString()">
+								(r_title like '%'||#{keyword}||'%')||(r_content like '%'||#{keyword}||'%)
+							</when>
 						</choose>
 					</trim>
 				</foreach>

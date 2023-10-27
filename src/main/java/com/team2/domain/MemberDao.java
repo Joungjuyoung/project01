@@ -1,5 +1,7 @@
 package com.team2.domain;
 
+import java.util.List;
+
 public interface MemberDao {
 	//회원가입
 	public void register(MemberVo vo) throws Exception;
@@ -14,5 +16,10 @@ public interface MemberDao {
 	public MemberVo login(MemberVo vo) throws Exception;
 	
 	//내정보 수정
-	public void memberUpdate(MemberVo vo)throws Exception;
+	public void memberUpdate(MemberVo vo) throws Exception;
+	
+	//이메일 인증
+	public void updateMailKey(MemberVo vo) throws Exception;
+	public void updateMailAuth(MemberVo vo) throws Exception;
+	public void emailAuthFail(String id) throws Exception;
 }

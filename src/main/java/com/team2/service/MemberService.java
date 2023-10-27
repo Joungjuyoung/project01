@@ -1,5 +1,7 @@
 package com.team2.service;
 
+import java.util.List;
+
 import com.team2.domain.MemberVo;
 
 public interface MemberService {
@@ -13,4 +15,8 @@ public interface MemberService {
 	public MemberVo login(MemberVo vo) throws Exception;
 	//내정보 수정
 	public void memberUpdate(MemberVo vo) throws Exception;
+	//이메일 인증
+	public void updateMailKey(MemberVo vo) throws Exception;
+	public void updateMailAuth(MemberVo vo) throws Exception;
+	public void emailAuthFail(String id) throws Exception;
 }

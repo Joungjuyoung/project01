@@ -6,8 +6,8 @@
 	<mapper namespace="memberMapper">
 	<!-- 회원가입  -->
 	<insert id="register">
-	INSERT INTO TBL_USER(u_id,u_pw,u_nickname,u_email,u_phone,u_auth)
-	 VALUES(#{u_id},#{u_pw},#{u_nickname},#{u_email},#{u_phone},#{u_auth})
+	INSERT INTO TBL_USER(u_id,u_pw,u_nickname,u_email,u_phone,u_auth,u_e_key)
+	 VALUES(#{u_id},#{u_pw},#{u_nickname},#{u_email},#{u_phone},#{u_auth},#{u_e_key})
 	</insert>
 	
 	<!-- 아이디 중복체크 -->
@@ -37,4 +37,17 @@
 		U_PHONE = #{u_phone}
 		WHERE U_ID = #{u_id}
 	</update>
+	
+	<!-- 이메일 인증 -->
+	<update id="updateMailKey" parameterType="com.team2.domain.MemberVo">
+    	UPDATE TBL_USER SET U_E_KEY = #{u_e_key} WHERE U_EMAIL = #{u_email} AND U_ID = #{u_id}
+	</update>
+	
+	<update id="updateMailAuth" parameterType="com.team2.domain.MemberVo">
+    	UPDATE TBL_USER SET U_E_AUTH = 1 WHERE U_EMAIL = #{u_email} AND U_E_KEY = #{u_e_key}
+	</update>
+	
+	<select id="emailAuthFail" parameterType="String" resultType="int">
+    	SELECT COUNT(*) FROM TBL_USER WHERE U_ID = #{u_id} AND U_E_AUTH = 1
+	</select>
 	</mapper>

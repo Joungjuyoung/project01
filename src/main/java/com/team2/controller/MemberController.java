@@ -7,9 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -85,11 +87,16 @@ public class MemberController {
 		
 		if(login != null && pwdMatch == true) {
 			session.setAttribute("member", login);
+			session.setMaxInactiveInterval(60 * 30);
 		}else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg",false);
 		}
-		
+        //이메일 인증 했는지 확인
+        if (vo.getU_e_auth() != 1) {
+        	session.invalidate();
+            return "/member/emailAuthFail";
+        }
 		return "redirect:/review/list";
 		
 	}
@@ -111,22 +118,39 @@ public class MemberController {
 		return pwdChk;
 	}
 	
-	/*
-	 * //내정보 수정
-	 * 
-	 * @GetMapping("/memberUpdateView") public String registerUpdateView() throws
-	 * Exception{ return "member/memberUpdateView"; }
-	 * 
-	 * @PostMapping("/memberUpdate") public String registerUpdate(MemberVo vo,
-	 * HttpSession session) throws Exception{ MemberVo login = service.login(vo);
-	 * System.out.println("Controller update");
-	 * 
-	 * if(login != null ) { System.out.println("성공"); String inputPass =
-	 * login.getU_pw(); String pwd = pwdEncoder.encode(inputPass); vo.setU_pw(pwd);
-	 * service.memberUpdate(vo); }else { System.out.println("실패"); return
-	 * "member/memberUpdateView"; } session.invalidate();
-	 * 
-	 * 
-	 * return "redirect:/"; }
-	 */
+	
+	 @GetMapping("/memberUpdateView") 
+	 public String registerUpdateView() throws Exception{
+		 return "member/memberUpdateView"; 
+		 }
+	  
+	 @PostMapping("/memberUpdate") 
+	 public String registerUpdate(MemberVo vo,HttpSession session) throws Exception{ 
+		 MemberVo login = service.login(vo);
+		 System.out.println("Controller update");
+	 
+		 if(login != null ) { 
+			 System.out.println("성공"); 
+			 String inputPass =login.getU_pw();
+			 vo.setU_pw(inputPass);
+			 service.memberUpdate(vo); 
+	 		}else { 
+	 			System.out.println("실패");
+	 			return "member/memberUpdateView";
+	 		} session.invalidate();
+	 		
+	 		
+	 	return "redirect:/"; 
+	 }
+	 
+	 //이메일 인증
+	 @GetMapping("/registerEmail")
+	 public String emailConfirm(MemberVo vo)throws Exception{
+		 System.out.println("Controller [emailConfirm]");
+	     service.updateMailAuth(vo);
+	     System.out.println(vo.getU_e_key());
+	     return "member/emailAuthSuccess";
+	 }
+	 
+	 
 }

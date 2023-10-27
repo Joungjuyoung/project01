@@ -65,8 +65,7 @@
 					<input class="form-control" type="text" id="u_id" name="u_id" value="${member.u_id}" readonly="readonly"/>
 				</div>
 				<div class="form-group has-feedback">
-					<label class="control-label" for="u_pw">패스워드</label>
-					<input class="form-control" type="password" id="u_pw" name="u_pw" value="${member.u_pw}" />
+					<input class="form-control" type="password" id="u_pw" name="u_pw" value="${member.u_pw}" hidden/>
 				</div>
 				<div class="form-group has-feedback">
 					<label class="control-label" for="u_nickname">성명</label>

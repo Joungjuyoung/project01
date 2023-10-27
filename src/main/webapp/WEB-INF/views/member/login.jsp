@@ -47,6 +47,7 @@
 			<div>
 				<button type="submit" id="submit">로그인</button>
 				<button type="button" onclick="location.href='./member/register'">회원가입</button>
+				<button type="button" onclick="location.href='./member/findIdView'">회원가입</button>
 			</div>
 		</c:if>
 		<c:if test="${member != null }">
