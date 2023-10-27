@@ -23,11 +23,11 @@ public class MemberServiceImpl implements MemberService {
 	private JavaMailSender mailSender;
 	
 	//회원가입
-
 	@Override
 	public void register(MemberVo vo) throws Exception {
 		System.out.println("Service register");
 		/* dao.register(vo); */
+		/* 이메일 인증을위한 이메일 전송 */
 		String mail_key = new TempKey().getKey(30,false); //랜덤키 길이 설정
 		vo.setU_e_key(mail_key);
 		
@@ -76,8 +76,7 @@ public class MemberServiceImpl implements MemberService {
 		dao.memberUpdate(vo);
 	}
 	
-	//이메일 인증
-    
+	//이메일 인증 Key입력, Auth업데이트
 	@Override
 	public void updateMailKey(MemberVo vo) throws Exception {
 		System.out.println("Service updateMailKey");
