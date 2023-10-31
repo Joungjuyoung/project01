@@ -150,6 +150,7 @@ public class MemberController {
 	     service.updateMailAuth(vo);
 	     System.out.println(vo.getU_e_key());
 	     return "member/emailAuthSuccess";
+	     
 	 }
 	 
 	 
