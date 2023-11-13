@@ -4,5 +4,5 @@
 
 <script type="text/javascript">
 	alert("이메일인증완료")
-	location.href = "./review/list"
+	location.href = "/review/list"
 </script>

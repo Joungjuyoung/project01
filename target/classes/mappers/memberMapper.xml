@@ -23,7 +23,7 @@
 	
 	<!-- 로그인  -->
 	<select id="login" resultType="com.team2.domain.MemberVo">
-		SELECT U_ID, U_PW, U_NICKNAME,U_AUTH
+		SELECT U_ID, U_PW, U_NICKNAME,U_AUTH,U_E_AUTH
 		 FROM TBL_USER
 		 WHERE U_ID = #{u_id}
 	</select>

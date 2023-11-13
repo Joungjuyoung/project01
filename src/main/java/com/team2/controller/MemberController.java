@@ -93,8 +93,8 @@ public class MemberController {
 			rttr.addFlashAttribute("msg",false);
 		}
         //이메일 인증 했는지 확인
-        if (vo.getU_e_auth() != 1) {
-        	session.invalidate();
+        if (login.getU_e_auth() == 0) {
+			session.invalidate();
             return "/member/emailAuthFail";
         }
 		return "redirect:/review/list";
